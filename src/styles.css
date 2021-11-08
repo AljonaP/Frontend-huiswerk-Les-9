@@ -1,3 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Mohave&display=swap');
+
 body {
-    background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#countries-list {
+    list-style-type: none;
+    column-count: 3;
+    max-width: 1000px;
+    border-radius: 4px;
+    border: 1px solid #dbdbdb;
+    background-color: #f9f9f9;
+    padding: 30px;
+}
+
+h1 {
+    align-items: center;
+}
+
+.flag {
+    width: 20px;
+    margin: 0 10px 0 0;
+    display: inline-block;
+    }
+
+span {
+    margin-top: 50px;
+    font-family: 'Mohave', sans-serif;
+    font-size: large;
+}
+
+.Europe{
+    color: #f7d22c;
+    margin-top: -20px;
+}
+
+.Africa{
+    color: #5b77bd;
+    margin-top: -20px;
+}
+
+.Americas{
+    color: #4b763f;
+    margin-top: -20px;
+}
+
+.Asia{
+    color: #be4d52;
+    margin-top: -20px;
+}
+
+.Oceania{
+    color: #954cb3;
+    margin-top: -20px;
 }

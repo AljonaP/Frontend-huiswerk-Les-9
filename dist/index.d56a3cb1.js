@@ -460,43 +460,57 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"5HwUs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+//Stap 1. Installeer en importeer Axios;
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 console.log('Hallo daar!');
 // 1. Schijf een async. functie (EdHub FE JS 10.6)
-// axios.get('https://restcountries.com/v2/all')
-let countries = [];
+// Stap 3. Schrijf een asynchrone functie die, met behulp van Axios, een GET-request maakt naar het juiste endpoint. Log de response in de console en bestudeer de data goed.
+// let countries = [];
 async function getCountries() {
+    const countryList = document.getElementById("countries-list");
     try {
         const result = await _axiosDefault.default.get('https://restcountries.com/v2/all');
-        // result info uti de API
+        const countries = result.data;
+        // result info uit de API
         // return result gaat dat niet goed
         // opbouwen data hier
         // return result.data;
+        // Stap 4. Probeer eens om de _naam_ van het _allereerste_ land te loggen in de console, welk pad moet je hiervoor volgen?
         console.log(result.data);
-    // logArray(result.data);
+        // logArray(result.data);
+        //sorteren op Population
+        countries.sort((a, b)=>{
+            return a.population - b.population;
+        });
+        result.data.map((country)=>{
+            const countryItem2 = document.createElement("li");
+            countryItem2.innerHTML = `
+                <p class="population">Has a population of: ${country.population} people</p>
+            `;
+            const countryItem = document.createElement("li");
+            countryItem.innerHTML = `
+                <img src="${country.flag}" alt="vlaggetje van landje" class="flag"/>
+                <span id="name" class="${regionName(country.region)}">${country.name}</span>
+    `;
+            countryList.appendChild(countryItem); //SAM: een classe geven aan countryList (Om te stylen) -->
+            countryList.appendChild(countryItem2); //SAM: een classe geven aan countryList (Om te stylen) -->
+        });
     } catch (e) {
         console.error(e);
     }
 }
-// const testResult = getCountries();
-// console.log(testResult);
-getCountries() // De naam van het land
- // Op déze manier is niet mogelijk een functie te schrijven:
- // const countryName = ARRAY.map((country) => {
- //     return country.name;
- // });
- //
- // console.log(countryName);
- // function logArray(arr){
- //     for (let i=0; i < arr.length; i++) {
- //         countries.push(arr[i]);
- //     }
- // }
- // console.log(countries);
- // De vlag van dat land
- // De zin: Has a population of [amount] people
-;
+getCountries();
+// Schrijf een aparte functie die één regio-naam verwacht, en op basis van deze regio de correcte kleur-naam als string
+// teruggeeft. Gebruik deze, om de naam van het land in de juiste kleur weer te geven op de pagina. _Tip_: zorg ervoor
+// dat je CSS-classes maakt voor alle regio-kleuren!
+function regionName(arrRegion) {
+    if (arrRegion === "Africa") return arrRegion === "Africa";
+    else if (arrRegion === "Asia") return "Asia";
+    else if (arrRegion === "Europe") return "Europe";
+    else if (arrRegion === "Oceania") return "Oceania";
+    else return "Americas";
+}
 
 },{"axios":"1IeuP","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"1IeuP":[function(require,module,exports) {
 module.exports = require('./lib/axios');
